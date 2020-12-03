@@ -1,0 +1,390 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Textures/TactilePaving_Roughness.jpg" type="Texture" id=2]
+[ext_resource path="res://Textures/TactilePaving_Normal.jpg" type="Texture" id=3]
+[ext_resource path="res://Assets/BlocksLibrary.tres" type="MeshLibrary" id=4]
+[ext_resource path="res://environment.tres" type="Environment" id=5]
+[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/Level.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/GameOver.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Coin.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=10]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 16, 0.5, 16 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.0941176, 0.501961, 0.12549, 1 )
+roughness = 0.9
+roughness_texture = ExtResource( 2 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 3 )
+uv1_scale = Vector3( 0.25, 0.25, 0.25 )
+uv1_triplanar = true
+
+[sub_resource type="CubeMesh" id=3]
+material = SubResource( 2 )
+size = Vector3( 32, 1, 32 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "Enemy_01_Movement"
+length = 6.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.8, 3.2, 4.6, 6.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, -3 ), Vector3( -8, 1, -3 ), Vector3( -8, 1, 4 ), Vector3( -8, 1, -3 ), Vector3( 1, 1, -3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.8, 3.2, 4.6, 6.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 810 ), Vector3( 630, 0, 810 ), Vector3( 0, 0, 810 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Enemy_02_Movement"
+length = 2.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.6, 2.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 10, 1, -2 ), Vector3( 14, 1, -2 ), Vector3( 10, 1, -2 ), Vector3( 10, 1, -2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, -180 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Enemy_03_Movement"
+length = 3.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.8, 2.8, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -12, 1, 9 ), Vector3( -7, 1, 9 ), Vector3( -7, 1, 13 ), Vector3( -12, 1, 13 ), Vector3( -12, 1, 9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 1.8, 2.8, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, -225 ), Vector3( 180, 0, -225 ), Vector3( 180, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Enemy_04_Movement"
+length = 4.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.2, 3.6, 4.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -14, 1, -14 ), Vector3( 10, 1, -14 ), Vector3( -14, 1, -14 ), Vector3( -14, 1, -14 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.2, 3.6, 4.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, -1080 ), Vector3( 0, 0, -2.73298e-06 ), Vector3( 0, 0, -2.73298e-06 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Enemy_05_Movement"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 8, 1, 14 ), Vector3( 8, 1, 4 ), Vector3( 8, 1, 14 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -450, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[node name="Level" type="Spatial"]
+script = ExtResource( 7 )
+game_over_scene = ExtResource( 8 )
+
+[node name="Camera" type="InterpolatedCamera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.965925, 0.258819, 0, -0.258819, 0.965925, 0, 21, 32 )
+environment = ExtResource( 5 )
+target = NodePath("../Player/CameraTarget")
+speed = 2.0
+enabled = true
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( -0.25, -0.866025, 0.433013, -0.433013, 0.5, 0.75, -0.866025, -1.29048e-08, -0.5, 4, 16, -8 )
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Floor"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource( 4 )
+cell_size = Vector3( 1, 1, 1 )
+data = {
+"cells": PoolIntArray( 8, 0, 786432, 15, 0, 0, 65520, 0, 0, 65530, 0, 0, 131066, 0, 655360, 196602, 0, 0, 8, 1, 0, 15, 1, 0, 65520, 1, 0, 5, 2, 0, 6, 2, 65536, 7, 2, 786432, 8, 2, 65536, 15, 2, 0, 65520, 2, 0, 15, 3, 0, 65520, 3, 0, 65525, 3, 0, 15, 4, 0, 65520, 4, 0, 65525, 4, 65536, 131061, 4, 786432, 15, 5, 0, 65520, 5, 0, 65525, 5, 1376256, 65526, 5, 0, 65527, 5, 65536, 65528, 5, 0, 131061, 5, 0, 131062, 5, 1441792, 11, 6, 0, 15, 6, 0, 65520, 6, 0, 11, 7, 786432, 15, 7, 0, 65520, 7, 0, 65532, 7, 1376256, 9, 8, 0, 10, 8, 131072, 11, 8, 65536, 15, 8, 0, 65520, 8, 0, 65532, 8, 786432, 131068, 8, 0, 196604, 8, 0, 262140, 8, 196608, 327676, 8, 1441792, 11, 9, 0, 15, 9, 0, 65520, 9, 0, 65532, 9, 0, 327676, 9, 655360, 393212, 9, 1441792, 0, 10, 0, 1, 10, 786432, 2, 10, 65536, 3, 10, 0, 11, 10, 786432, 15, 10, 0, 65520, 10, 0, 65525, 10, 65536, 65526, 10, 786432, 65527, 10, 0, 65532, 10, 786432, 65533, 10, 0, 65534, 10, 786432, 65535, 10, 65536, 65536, 10, 0, 65537, 10, 1441792, 131072, 10, 0, 196608, 10, 458752, 262144, 10, 0, 327676, 10, 589824, 327677, 10, 327680, 327678, 10, 0, 327679, 10, 786432, 393212, 10, 1376256, 393213, 10, 393216, 393214, 10, 327680, 393215, 10, 0, 458749, 10, 655360, 458750, 10, 1441792, 11, 11, 131072, 15, 11, 0, 65520, 11, 0, 65525, 11, 0, 65526, 11, 1376256, 65527, 11, 65536, 65532, 11, 65536, 9, 12, 0, 10, 12, 65536, 11, 12, 0, 15, 12, 0, 65520, 12, 0, 15, 13, 0, 65520, 13, 0, 65551, 13, 0, 131056, 13, 0, 15, 14, 0, 65520, 14, 0, 65551, 14, 0, 131056, 14, 0, 0, 15, 1310720, 1, 15, 1310720, 2, 15, 1310720, 3, 15, 1310720, 4, 15, 1310720, 5, 15, 1310720, 6, 15, 1310720, 7, 15, 1310720, 8, 15, 1310720, 9, 15, 1310720, 10, 15, 1310720, 11, 15, 1310720, 12, 15, 1310720, 13, 15, 1310720, 14, 15, 1310720, 15, 15, 0, 65520, 15, 0, 65521, 15, 1310720, 65522, 15, 1310720, 65523, 15, 1310720, 65524, 15, 1310720, 65525, 15, 1310720, 65526, 15, 1310720, 65527, 15, 1310720, 65528, 15, 1310720, 65529, 15, 1310720, 65530, 15, 1310720, 65531, 15, 1310720, 65532, 15, 1310720, 65533, 15, 1310720, 65534, 15, 1310720, 65535, 15, 1310720, 65549, 15, 1310720, 65550, 15, 1310720, 65551, 15, 0, 131056, 15, 0, 131057, 15, 1310720, 131058, 15, 1310720, 131087, 15, 0, 196592, 15, 0, 196623, 15, 0, 262128, 15, 0, 0, 65520, 786432, 1, 65520, 786432, 2, 65520, 786432, 3, 65520, 786432, 4, 65520, 786432, 5, 65520, 786432, 6, 65520, 786432, 7, 65520, 786432, 8, 65520, 786432, 9, 65520, 786432, 10, 65520, 786432, 11, 65520, 786432, 12, 65520, 786432, 13, 65520, 786432, 14, 65520, 786432, 15, 65520, 0, 65520, 65520, 0, 65521, 65520, 786432, 65522, 65520, 786432, 65523, 65520, 786432, 65524, 65520, 786432, 65525, 65520, 786432, 65526, 65520, 786432, 65527, 65520, 786432, 65528, 65520, 786432, 65529, 65520, 786432, 65530, 65520, 786432, 65531, 65520, 786432, 65532, 65520, 786432, 65533, 65520, 786432, 65534, 65520, 786432, 65535, 65520, 786432, 65549, 65520, 786432, 65550, 65520, 786432, 65551, 65520, 0, 131056, 65520, 0, 131057, 65520, 786432, 131058, 65520, 786432, 131087, 65520, 0, 196592, 65520, 0, 196623, 65520, 0, 262128, 65520, 0, 11, 65521, 0, 15, 65521, 0, 65520, 65521, 0, 65551, 65521, 0, 131056, 65521, 0, 11, 65522, 786432, 15, 65522, 0, 65520, 65522, 0, 65551, 65522, 0, 131056, 65522, 0, 4, 65523, 0, 5, 65523, 65536, 6, 65523, 786432, 7, 65523, 0, 11, 65523, 65536, 15, 65523, 0, 65520, 65523, 0, 0, 65524, 0, 11, 65524, 0, 15, 65524, 0, 65520, 65524, 0, 65528, 65524, 0, 65529, 65524, 1376256, 65530, 65524, 786432, 65531, 65524, 1376256, 65532, 65524, 786432, 65533, 65524, 0, 65534, 65524, 65536, 65535, 65524, 1376256, 0, 65525, 0, 15, 65525, 0, 65520, 65525, 0, 65534, 65525, 1376256, 65535, 65525, 1310720, 131070, 65525, 1114112, 131071, 65525, 786432, 196607, 65525, 0, 0, 65526, 65536, 15, 65526, 0, 65520, 65526, 0, 65534, 65526, 1376256, 65535, 65526, 1376256, 65536, 65526, 1441792, 131071, 65526, 0, 0, 65527, 1376256, 8, 65527, 0, 15, 65527, 0, 65520, 65527, 0, 65524, 65527, 786432, 0, 65528, 0, 8, 65528, 0, 15, 65528, 0, 65520, 65528, 0, 65524, 65528, 0, 65544, 65528, 1507328, 131060, 65528, 851968, 0, 65529, 786432, 1, 65529, 0, 2, 65529, 131072, 3, 65529, 0, 8, 65529, 0, 15, 65529, 0, 65520, 65529, 0, 65524, 65529, 65536, 65525, 65529, 0, 65526, 65529, 0, 65527, 65529, 1376256, 65528, 65529, 0, 65529, 65529, 65536, 65530, 65529, 1376256, 65544, 65529, 262144, 131060, 65529, 1179648, 131061, 65529, 0, 131062, 65529, 196608, 131063, 65529, 458752, 131064, 65529, 393216, 131080, 65529, 786432, 196598, 65529, 0, 196599, 65529, 1441792, 196616, 65529, 983040, 2, 65530, 786432, 8, 65530, 131072, 15, 65530, 0, 65520, 65530, 0, 65525, 65530, 786432, 65530, 65530, 0, 131061, 65530, 1114112, 196597, 65530, 851968, 196616, 65530, 196608, 2, 65531, 131072, 8, 65531, 65536, 15, 65531, 0, 65520, 65531, 0, 65525, 65531, 0, 131061, 65531, 0, 2, 65532, 0, 8, 65532, 786432, 15, 65532, 0, 65520, 65532, 0, 65525, 65532, 1376256, 65544, 65532, 327680, 131080, 65532, 0, 2, 65533, 0, 8, 65533, 0, 15, 65533, 0, 65520, 65533, 0, 65544, 65533, 589824, 8, 65534, 131072, 15, 65534, 0, 65520, 65534, 0, 65544, 65534, 1441792, 8, 65535, 65536, 9, 65535, 0, 10, 65535, 131072, 11, 65535, 786432, 15, 65535, 0, 65520, 65535, 0, 65530, 65535, 0, 65544, 65535, 1441792, 65545, 65535, 0, 131066, 65535, 1441792 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 5, 0 )
+}
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="CameraTarget" type="Spatial" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 9, 12 )
+
+[node name="Tween" type="Tween" parent="Player"]
+
+[node name="Enemies" type="Spatial" parent="."]
+
+[node name="Enemy_01" parent="Enemies" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemies/Enemy_01"]
+autoplay = "Enemy_01_Movement"
+anims/Enemy_01_Movement = SubResource( 4 )
+
+[node name="Enemy_02" parent="Enemies" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, -2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemies/Enemy_02"]
+autoplay = "Enemy_02_Movement"
+anims/Enemy_02_Movement = SubResource( 5 )
+
+[node name="Enemy_03" parent="Enemies" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemies/Enemy_03"]
+autoplay = "Enemy_03_Movement"
+anims/Enemy_03_Movement = SubResource( 6 )
+
+[node name="Enemy_04" parent="Enemies" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1, -14 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemies/Enemy_04"]
+autoplay = "Enemy_04_Movement"
+anims/Enemy_04_Movement = SubResource( 7 )
+
+[node name="Enemy_05" parent="Enemies" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 14 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemies/Enemy_05"]
+autoplay = "Enemy_05_Movement"
+anims/Enemy_05_Movement = SubResource( 8 )
+
+[node name="Coins" type="Spatial" parent="."]
+
+[node name="Coin_01" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 0 )
+
+[node name="Coin_02" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 1, -7.5 )
+
+[node name="Coin_03" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1, -14 )
+
+[node name="Coin_04" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 1, -12.5 )
+
+[node name="Coin_05" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, -12.5 )
+
+[node name="Coin_06" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -14 )
+
+[node name="Coin_07" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 1, -14 )
+
+[node name="Coin_08" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, 1 )
+
+[node name="Coin_09" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 1 )
+
+[node name="Coin_10" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 7 )
+
+[node name="Coin_11" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 10.5 )
+
+[node name="Coin_12" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 1, 8.5 )
+
+[node name="Coin_13" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1, 11.5 )
+
+[node name="Coin_14" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 11.5 )
+
+[node name="Coin_15" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 1, -7 )
+
+[node name="Coin_16" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 1, 9 )
+
+[node name="Coin_17" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 1, 13 )
+
+[node name="Coin_18" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 11 )
+
+[node name="Coin_19" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, 11 )
+
+[node name="Coin_20" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, -5 )
+
+[node name="Coin_21" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, -5 )
+
+[node name="Coin_22" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 1, -8 )
+
+[node name="Coin_23" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0 )
+
+[node name="Coin_24" parent="Coins" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -8 )
+
+[node name="HUD" parent="." instance=ExtResource( 10 )]
+[connection signal="died" from="Player" to="." method="_on_player_death" flags=6]
+[connection signal="tween_all_completed" from="Player/Tween" to="." method="_on_player_reached_heaven"]
+[connection signal="body_entered" from="Enemies/Enemy_01" to="." method="_on_body_entered_enemy"]
+[connection signal="body_entered" from="Enemies/Enemy_02" to="." method="_on_body_entered_enemy"]
+[connection signal="body_entered" from="Enemies/Enemy_03" to="." method="_on_body_entered_enemy"]
+[connection signal="body_entered" from="Enemies/Enemy_04" to="." method="_on_body_entered_enemy"]
+[connection signal="body_entered" from="Enemies/Enemy_05" to="." method="_on_body_entered_enemy"]
+[connection signal="body_entered" from="Coins/Coin_01" to="Coins/Coin_01" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_01" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_02" to="Coins/Coin_02" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_02" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_03" to="Coins/Coin_03" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_03" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_04" to="Coins/Coin_04" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_04" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_05" to="Coins/Coin_05" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_05" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_06" to="Coins/Coin_06" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_06" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_07" to="Coins/Coin_07" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_07" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_08" to="Coins/Coin_08" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_08" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_09" to="Coins/Coin_09" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_09" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_10" to="Coins/Coin_10" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_10" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_11" to="Coins/Coin_11" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_11" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_12" to="Coins/Coin_12" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_12" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_13" to="Coins/Coin_13" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_13" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_14" to="Coins/Coin_14" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_14" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_15" to="Coins/Coin_15" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_15" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_16" to="Coins/Coin_16" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_16" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_17" to="Coins/Coin_17" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_17" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_18" to="Coins/Coin_18" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_18" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_19" to="Coins/Coin_19" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_19" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_20" to="Coins/Coin_20" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_20" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_21" to="Coins/Coin_21" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_21" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_22" to="Coins/Coin_22" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_22" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_23" to="Coins/Coin_23" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_23" to="HUD" method="on_coin_collected"]
+[connection signal="body_entered" from="Coins/Coin_24" to="Coins/Coin_24" method="collected_by"]
+[connection signal="collected" from="Coins/Coin_24" to="HUD" method="on_coin_collected"]
+[connection signal="all_coins_collected" from="HUD" to="." method="_on_all_coins_collected"]
